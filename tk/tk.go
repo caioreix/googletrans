@@ -89,23 +89,23 @@ func Get(s string, tkk string) (tk string, err error) {
 func xr(a int, b string) int {
 	for c := 0; c < len(b)-2; c += 3 {
 		d := string(b[c+2])
-		var dd int
+		var dd uint
 		if "a" <= d {
-			dd = int(d[0]) - 87
+			dd = uint(int(d[0]) - 87)
 		} else {
-			dd = s2int(d)
+			dd = uint(s2int(d))
 		}
 
 		if "+" == string(b[c+1]) {
-			dd = (a % 0x100000000) >> dd
+			dd = uint(a%0x100000000) >> dd
 		} else {
-			dd = a << dd
+			dd = uint(a) << dd
 		}
 
 		if "+" == string(b[c]) {
-			a = (a + dd) & 4294967295
+			a = int((uint(a) + dd) & 4294967295)
 		} else {
-			a = a ^ dd
+			a = int(uint(a) ^ dd)
 		}
 	}
 	return a
